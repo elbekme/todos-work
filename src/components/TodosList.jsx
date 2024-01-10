@@ -3,12 +3,14 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 
+// eslint-disable-next-line react/prop-types
 const TodosList = ({ todos, deleteTodo, loading }) => {
   const todosPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastTodo = currentPage * todosPerPage;
   const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+  // eslint-disable-next-line react/prop-types
   const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
 
   const handlePageChange = (pageNumber) => {
