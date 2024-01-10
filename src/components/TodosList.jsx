@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 const TodosList = ({ todos, deleteTodo, loading }) => {
   const todosPerPage = 10;
@@ -13,6 +14,12 @@ const TodosList = ({ todos, deleteTodo, loading }) => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  if (loading) {
+    return <div style={{textAlign:'center', paddingTop: 'calc(15% - 10px)'}}>
+      <Spinner size='xs'  animation="border" variant="primary" />
+    </div>;
+  }
 
   return (
     <div>

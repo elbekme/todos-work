@@ -31,24 +31,30 @@ const Todos = () => {
     }
 
     const addTodo = async (todo) => {
+      setLoading(true);
       try{
-        const res = await axios.post('https://jsonplaceholder.typicode.com/todos', todo);
+        const res = await axios.post('https://jsonplaceholder.typicode.com/todos',todo);
         console.log(res.data);
         fetchTodos();
+        setLoading(false)
       } catch(err){
         console.log(err.message);
+        setLoading(false);
       }
   };
 
 
     const deleteTodo = async (id) => {
+      setLoading(true);
       console.log(id);
       if(window.confirm('Are you sure you want to delete')){
         try{
           await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
           fetchTodos();
+          setLoading(false);
         } catch(err){
           console.log(err.message);
+          setLoading(false);
         }
       }
     };
@@ -60,7 +66,7 @@ const Todos = () => {
           <Button className='py-2' onClick={() => setShow(true)}>Add Todo</Button>
         </div>
         <ModalTodo show={show} setShow={setShow}>
-            <AddTodos  addTodo={addTodo} setShow={setShow}/>
+            <AddTodos loading={loading}  addTodo={addTodo} setShow={setShow}/>
         </ModalTodo>
         <TodosList fetchTodos={fetchTodos} addTodo={addTodo} deleteTodo={deleteTodo} loading={loading} errorMsg={errorMsg}  todos={todos}/> 
     </div>
